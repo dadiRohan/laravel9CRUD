@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StorePostRequest;
+use App\Http\Requests\StoreCommentRequest;
 use App\Http\Resources\PostResource;
 use App\Models\Post;
+use App\Models\Comment;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -98,4 +100,24 @@ class PostController extends Controller
 
         return response(null, 204);
     }
+
+
+    /*
+    * Comment APIs    
+    */
+    public function commentStore(StoreCommentRequest $request)
+    {
+        // dd($request->post_id,$request->comment);
+
+        $comment = Comment::create($request->all());
+
+        return $comment;
+
+    }
+
+    public function commentView($id)
+    {
+        return Comment::find($id) ?? [];
+    }
+
 }

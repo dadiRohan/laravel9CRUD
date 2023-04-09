@@ -21,3 +21,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 Route::apiResource('posts',PostController::class);
+
+Route::post('comment',[PostController::class,'commentStore']);
+Route::get('comment/{id}',[PostController::class,'commentView']);
