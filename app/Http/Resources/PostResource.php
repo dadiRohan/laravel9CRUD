@@ -3,6 +3,8 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Http\Request;
+use App\Models\Comment;
 
 class PostResource extends JsonResource
 {
@@ -14,6 +16,10 @@ class PostResource extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        $data = parent::toArray($request);
+        $data['comments'] = Comment::where('post_id',$data['id'])
+                            ->latest()->get();
+
+        return $data;
     }
 }

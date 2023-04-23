@@ -41,12 +41,6 @@ class PostController extends Controller
      */
     public function store(StorePostRequest $request)
     {
-        // $request = request()->validate([
-        //     'title' => 'required',
-        //     'description' => 'required',
-        // ]);
-
-        // dd($request);
         $post = Post::create($request->all());
 
         return new PostResource($post);
@@ -118,6 +112,15 @@ class PostController extends Controller
     public function commentView($id)
     {
         return Comment::find($id) ?? [];
+    }
+
+    public function updateComment(StoreCommentRequest $request,$id)
+    {
+        $comment = Comment::find($id);
+
+        $comment->update($request->all());
+
+        return $comment;
     }
 
 }

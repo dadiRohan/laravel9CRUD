@@ -15,8 +15,8 @@ class Post extends Model
     /*
     * Post Comments
     */
-    // public function comments()
-    // {
-    //     return $this->hasMany(class::Comment, 'post_id', 'id');
-    // }    
+    public function comments()
+    {
+        return $this->hasMany(Comment::class, 'post_id', 'id');
+    }
 }
